@@ -4,7 +4,7 @@ import * as S from "./style";
 
 const FirstCam = () => {
   const [isStart, setIsStart] = useState(false);
-  const [time, setTime] = useState(8);
+  const [time, setTime] = useState(10);
 
   const startButtonClick = () => {
     setIsStart(true);
