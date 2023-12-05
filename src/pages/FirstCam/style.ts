@@ -1,0 +1,28 @@
+import styled from "styled-components";
+
+export const CamLayout = styled.div`
+  position: absolute;
+  bottom: 50%;
+  left: 50%;
+  transform: translate(-50%,50%) scaleX(-1);
+  width: 700px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+`
+export const Layout = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+export const StartButton = styled.button`
+
+`
+export const Count = styled.h1`
+  position: absolute;
+  right: 0;
+`
