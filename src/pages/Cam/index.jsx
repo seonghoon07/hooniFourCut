@@ -23,14 +23,15 @@ const Cam = ({setPages}) => {
     setPhotoes((prev) => [...prev, imageSrc]);
     setCurrentImage(imageSrc);
     soundPlay();
-    if (photoes.length < 7) {
+    if (photoes.length < 1) {
       setTimeout(() => {
         setTime(1);
         setCurrentImage(null);
       }, 1500);
     }
     else {
-      setPages(1)
+      setTimeout(() => setPages(1),1500)
+      
     }
   };
 
