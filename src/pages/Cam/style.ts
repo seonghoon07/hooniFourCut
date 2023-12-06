@@ -22,12 +22,17 @@ export const Layout = styled.div`
 export const StartButton = styled.button`
 
 `
-export const Img = styled.img`
-  position: absolute;
-  left: 0;
-  width: 300px;
-`
-export const Count = styled.h1`
+export const Second = styled.h1`
   position: absolute;
   right: 17%;
 `
+export const Count = styled.h1`
+  position: absolute;
+  right: 12%;
+`
+export const FlippedImage = styled.img`
+  transform: scaleX(-1);
+  position: absolute;
+  left: 0;
+  width: 300px;
+`;

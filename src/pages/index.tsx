@@ -1,5 +1,5 @@
 import React from "react";
-import FirstCam from "./FirstCam";
+import FirstCam from "./Cam";
 
 const Home = () => {
   return (
