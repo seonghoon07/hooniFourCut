@@ -13,9 +13,11 @@ export const GetImgsLayout = styled.div`
   background-color: aliceblue;
   position: relative;
 `
-export const GetImg = styled.img`
+export const GetImg = styled.img<{ selected: boolean }>`
   width: 300px;
   transform: scaleX(-1);
+  border: ${(props) => (props.selected ? "3px solid black" : "3px solid transparent")};
+  box-sizing: border-box;
 `
 export const GetImgs = styled.div`
   display: flex;

@@ -8,7 +8,7 @@ import { photo } from "../../atoms/photo";
 
 const Cam = ({setPages}) => {
   const [isStart, setIsStart] = useState(false);
-  const [time, setTime] = useState(5);
+  const [time, setTime] = useState(2);
   const webcamRef = useRef(null);
   const [photoes, setPhotoes] = useAtom(photo);
   const [currentImage, setCurrentImage] = useState(null);
@@ -25,7 +25,7 @@ const Cam = ({setPages}) => {
     soundPlay();
     if (photoes.length < 7) {
       setTimeout(() => {
-        setTime(5);
+        setTime(1);
         setCurrentImage(null);
       }, 1500);
     }
