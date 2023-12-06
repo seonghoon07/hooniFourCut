@@ -6,9 +6,9 @@ import shutter from "../../music/shutter.mp3";
 import { useAtom } from "jotai";
 import { photo } from "../../atoms/photo";
 
-const Cam = () => {
+const Cam = ({setPages}) => {
   const [isStart, setIsStart] = useState(false);
-  const [time, setTime] = useState(5);
+  const [time, setTime] = useState(2);
   const webcamRef = useRef(null);
   const [photoes, setPhotoes] = useAtom(photo);
   const [currentImage, setCurrentImage] = useState(null);
@@ -25,16 +25,19 @@ const Cam = () => {
     soundPlay();
     if (photoes.length < 7) {
       setTimeout(() => {
-        setTime(5);
+        setTime(1);
         setCurrentImage(null);
       }, 1500);
+    }
+    else {
+      setPages(1)
     }
   };
 
   useEffect(() => {
     console.log(photoes);
   }, [photoes]);
-  
+
   useEffect(() => {
     if (isStart && time > 0) {
       setTimeout(() => setTime(time - 1), 1500);
