@@ -8,8 +8,6 @@ export const CamLayout = styled.div`
   width: 700px;
   display: flex;
   justify-content: center;
-  flex-wrap: wrap;
-  gap: 6px;
 `
 export const Layout = styled.div`
   width: 100%;
@@ -35,4 +33,14 @@ export const FlippedImage = styled.img`
   position: absolute;
   left: 0;
   width: 300px;
-`;
+`
+export const SoonImg = styled.img`
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+`
+export const AllCam = styled.div`
+  position: relative;
+  width: 700px;
+`

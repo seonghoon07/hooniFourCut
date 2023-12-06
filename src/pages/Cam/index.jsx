@@ -1,31 +1,43 @@
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import * as S from "./style";
+import useSound from "use-sound";
+import shutter from "../../music/shutter.mp3";
+import { useAtom } from "jotai";
+import { photo } from "../../atoms/photo";
 
 const Cam = () => {
   const [isStart, setIsStart] = useState(false);
-  const [time, setTime] = useState(2);
+  const [time, setTime] = useState(5);
   const webcamRef = useRef(null);
-  const [saveImgs, setSaveImgs] = useState([]);
+  const [photoes, setPhotoes] = useAtom(photo);
+  const [currentImage, setCurrentImage] = useState(null);
+  const [soundPlay] = useSound(shutter);
 
   const startButtonClick = () => {
     setIsStart(true);
   };
+
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
-    setSaveImgs((prev) => [...prev, imageSrc]);
-    if (saveImgs.length < 7) {
+    setPhotoes((prev) => [...prev, imageSrc]);
+    setCurrentImage(imageSrc);
+    soundPlay();
+    if (photoes.length < 7) {
       setTimeout(() => {
-        setTime(1)
-      },1500);
+        setTime(5);
+        setCurrentImage(null);
+      }, 1500);
     }
   };
+
   useEffect(() => {
-    console.log(saveImgs);
-  }, [saveImgs]);
+    console.log(photoes);
+  }, [photoes]);
+  
   useEffect(() => {
     if (isStart && time > 0) {
-      setTimeout(() => setTime(time - 1), 1000);
+      setTimeout(() => setTime(time - 1), 1500);
     }
     if (time === 0 && isStart) {
       capture();
@@ -36,12 +48,15 @@ const Cam = () => {
     <S.Layout>
       {isStart && (
         <S.CamLayout>
-          <Webcam
-            width={700}
-            audio={false}
-            screenshotFormat="image/jpeg"
-            ref={webcamRef}
-          />
+          <S.AllCam>
+            <Webcam
+              width={700}
+              audio={false}
+              screenshotFormat="image/jpeg"
+              ref={webcamRef}
+            />
+            {currentImage && <S.SoonImg src={currentImage} alt="Captured" />}
+          </S.AllCam>
         </S.CamLayout>
       )}
       {isStart === false ? (
@@ -49,7 +64,7 @@ const Cam = () => {
       ) : (
         <>
           <S.Second>{time}</S.Second>
-          <S.Count>{saveImgs.length}/8</S.Count>
+          <S.Count>{photoes.length}/8</S.Count>
         </>
       )}
     </S.Layout>
