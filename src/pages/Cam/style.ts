@@ -18,7 +18,16 @@ export const Layout = styled.div`
   justify-content: center;
 `
 export const StartButton = styled.button`
-
+  border: none;
+  background-color: black;
+  color: white;
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  font-size: 20px;
+  &:hover {
+    background-color: #2E2E2E;
+  }
 `
 export const Second = styled.h1`
   position: absolute;

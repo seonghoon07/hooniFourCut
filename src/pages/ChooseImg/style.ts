@@ -35,9 +35,17 @@ export const Title = styled.h1`
   top: 5%;
   left: 50%;
   transform: translate(-50%,0);
+  font-size: 40px;
 `
 export const SelectImgCount = styled.h1`
   position: absolute;
   top: 5%;
   left: 7%;
+  font-size: 40px;
+`
+export const ChooseTime = styled.h1`
+  position: absolute;
+  top: 5%;
+  left: 23%;
+  font-size: 40px;
 `

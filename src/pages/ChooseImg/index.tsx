@@ -37,7 +37,7 @@ const ChooseImg = ({setPages}: ChooseImgProps) => {
       <S.GetImgsLayout>
         <S.Title>사진을 고르세요</S.Title>
         <S.SelectImgCount>{selectedImg.length}/4</S.SelectImgCount>
-        <h1>{time}</h1>
+        <S.ChooseTime>{time}초</S.ChooseTime>
         <S.GetImgs>
           {getPhotoes.map((item, index) => (
             <S.GetImg

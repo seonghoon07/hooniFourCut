@@ -48,16 +48,22 @@ const Cam = ({setPages}) => {
     }
   }, [isStart, time]);
 
+  const videoConstraints = {
+    width: 800,
+    height: 500,
+    aspectRatio: 16 / 9, // Set your desired aspect ratio here
+  };
+
   return (
     <S.Layout>
       {isStart && (
         <S.CamLayout>
           <S.AllCam>
             <Webcam
-              width={700}
               audio={false}
               screenshotFormat="image/jpeg"
               ref={webcamRef}
+              videoConstraints={videoConstraints}
             />
             {currentImage && <S.SoonImg src={currentImage} alt="Captured" />}
           </S.AllCam>
