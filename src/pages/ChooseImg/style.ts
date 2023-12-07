@@ -36,3 +36,8 @@ export const Title = styled.h1`
   left: 50%;
   transform: translate(-50%,0);
 `
+export const SelectImgCount = styled.h1`
+  position: absolute;
+  top: 5%;
+  left: 7%;
+`
