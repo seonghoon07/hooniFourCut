@@ -2,16 +2,17 @@ import React, { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import * as S from "./style";
 import useSound from "use-sound";
-import shutter from "../../music/shutter.mp3";
+import shutter from "music/shutter.mp3";
 import { useAtom } from "jotai";
-import { photo } from "../../atoms/photo";
+import { photo } from "atoms/photo";
+import ChooseImgProps from "interfaces/ChooseImgProps";
 
-const Cam = ({setPages}) => {
+const Cam = ({ setPages }: ChooseImgProps) => {
   const [isStart, setIsStart] = useState(false);
   const [time, setTime] = useState(2);
-  const webcamRef = useRef(null);
+  const webcamRef = useRef<Webcam>(null);
   const [photoes, setPhotoes] = useAtom(photo);
-  const [currentImage, setCurrentImage] = useState(null);
+  const [currentImage, setCurrentImage] = useState("");
   const [soundPlay] = useSound(shutter);
 
   const startButtonClick = () => {
@@ -19,19 +20,19 @@ const Cam = ({setPages}) => {
   };
 
   const capture = () => {
-    const imageSrc = webcamRef.current.getScreenshot();
-    setPhotoes((prev) => [...prev, imageSrc]);
-    setCurrentImage(imageSrc);
-    soundPlay();
-    if (photoes.length < 7) {
-      setTimeout(() => {
-        setTime(1);
-        setCurrentImage(null);
-      }, 1500);
-    }
-    else {
-      setTimeout(() => setPages(1),1500)
-      
+    const imageSrc = webcamRef.current?.getScreenshot();
+    if (typeof imageSrc === "string") {
+      setPhotoes((prev) => [...prev, imageSrc]);
+      setCurrentImage(imageSrc);
+      soundPlay();
+      if (photoes.length < 7) {
+        setTimeout(() => {
+          setTime(1);
+          setCurrentImage("");
+        }, 1500);
+      } else {
+        setTimeout(() => setPages(1), 1500);
+      }
     }
   };
 

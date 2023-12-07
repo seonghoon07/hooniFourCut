@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { useAtom, useSetAtom } from "jotai";
-import { photo } from "../../atoms/photo";
-
-interface ChooseImgProps {
-  setPages: React.Dispatch<React.SetStateAction<number>>;
-}
+import ChooseImgProps from "interfaces/ChooseImgProps";
+import { photo } from "atoms/photo";
 
 const ChooseImg = ({setPages}: ChooseImgProps) => {
   const [getPhotoes, setGetPhotoes] = useAtom(photo);
