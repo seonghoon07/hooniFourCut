@@ -51,7 +51,7 @@ const Cam = ({setPages}) => {
   const videoConstraints = {
     width: 800,
     height: 500,
-    aspectRatio: 16 / 9, // Set your desired aspect ratio here
+    aspectRatio: 16 / 9,
   };
 
   return (

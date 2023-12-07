@@ -8,8 +8,8 @@ export const Layout = styled.div`
   align-items: center;
 `
 export const FinalLayout = styled.div`
-  height: 640px;
-  width: 210px;
+  height: 630px;
+  width: 240px;
   background-color: black;
   display: flex;
   justify-content: center;
@@ -18,11 +18,11 @@ export const FinalLayout = styled.div`
 export const FinalImgs = styled.div`
   position: absolute;
   bottom: 5%;
-  width: 180px;
+  width: 220px;
   height: 550px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 4px;
 `
 export const FinalImg = styled.img`
   

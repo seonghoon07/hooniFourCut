@@ -10,8 +10,10 @@ export const Layout = styled.div`
 export const GetImgsLayout = styled.div`
   width: 1300px;
   height: 600px;
-  background-color: aliceblue;
   position: relative;
+  background-color: rgba(0,0,0,0.5);
+  color: white;
+  border-radius: 10px;
 `
 export const GetImg = styled.img<{ selected: boolean }>`
   width: 300px;

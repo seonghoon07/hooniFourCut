@@ -11,7 +11,7 @@ const Final = () => {
         <S.FinalImgs>
           {
             finalImg.map((item,index) => (
-              <img src={item} key={index} />
+              <S.FinalImg src={item} key={index} />
             ))
           }
         </S.FinalImgs>
