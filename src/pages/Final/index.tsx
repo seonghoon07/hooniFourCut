@@ -8,6 +8,9 @@ const Final = () => {
   return (
     <S.Layout>
       <S.FinalLayout>
+        <S.NameLayout>
+          <S.Name>성훈네컷</S.Name>
+        </S.NameLayout>
         <S.FinalImgs>
           {
             finalImg.map((item,index) => (

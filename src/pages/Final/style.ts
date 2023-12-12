@@ -27,3 +27,13 @@ export const FinalImgs = styled.div`
 export const FinalImg = styled.img`
   
 `
+export const NameLayout = styled.div`
+  width: 100%;
+  height: 47px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
+export const Name = styled.h3`
+  color: white;
+`
