@@ -25,7 +25,7 @@ export const FinalImgs = styled.div`
   gap: 4px;
 `
 export const FinalImg = styled.img`
-  
+  transform: scaleX(-1);
 `
 export const NameLayout = styled.div`
   width: 100%;
