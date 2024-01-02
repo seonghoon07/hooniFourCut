@@ -2,12 +2,25 @@ import React, { useEffect, useState } from "react";
 import * as S from "./style";
 import { useAtom, useSetAtom } from "jotai";
 import ChooseImgProps from "interfaces/ChooseImgProps";
+import selectBackgroundColor from "helper/selectBackgroundColor";
+import selectColor from "helper/selectColor";
 import { photo } from "atoms/photo";
 
 const ChooseImg = ({ setPages }: ChooseImgProps) => {
   const [getPhotoes, setGetPhotoes] = useAtom(photo);
   const [selectedImg, setSelectedImg] = useState<string[]>([]);
   const [time, setTime] = useState(15);
+  const [selectedColorIndex, setSelectedColorIndex] = useState<number>(0);
+  const color = [
+    "black",
+    "gray",
+    "lightgray",
+    "white",
+    "blue",
+    "pink",
+    "skyblue",
+    "lightpurple",
+  ];
 
   const handleImageClick = (item: string) => {
     if (selectedImg.includes(item)) {
@@ -20,6 +33,10 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
   const getRandomElements = (list: string[], roof: number) => {
     const shuffled = list.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, roof);
+  };
+
+  const onSelectColor = (index: number) => {
+    setSelectedColorIndex(index);
   };
 
   useEffect(() => {
@@ -44,9 +61,11 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
   return (
     <S.Layout>
       <S.GetImgsLayout>
+        <S.TextLayout>
+          <S.SelectImgCount>{selectedImg.length}/4</S.SelectImgCount>
+          <S.ChooseTime>{time}초</S.ChooseTime>
+        </S.TextLayout>
         <S.Title>사진을 고르세요</S.Title>
-        <S.SelectImgCount>{selectedImg.length}/4</S.SelectImgCount>
-        <S.ChooseTime>{time}초</S.ChooseTime>
         <S.GetImgs>
           {getPhotoes.map((item, index) => (
             <S.GetImg
@@ -58,12 +77,19 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
             />
           ))}
         </S.GetImgs>
+        <S.DevideLine></S.DevideLine>
+        <S.ChooseColor>
+          {color.map((item, index) => {
+            return (
+              <S.ColorBox onClick={() => onSelectColor(index)}></S.ColorBox>
+            );
+          })}
+        </S.ChooseColor>
       </S.GetImgsLayout>
       <S.PreviewLayout>
-        <S.FinalLayout>
-          <S.NameLayout>
-            <S.Name>성훈네컷</S.Name>
-          </S.NameLayout>
+        <S.FinalLayout
+          backgroundColor={selectBackgroundColor(selectedColorIndex)}
+        >
           <S.FinalImgs>
             {selectedImg.map((item, index) => (
               <S.FinalImg src={item} key={index} />
