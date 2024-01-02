@@ -7,7 +7,7 @@ export const Layout = styled.div`
   justify-content: center;
   align-items: center;
 `
-export const FinalLayout = styled.div`
+export const FinalLayout = styled.div<{backgroundColor: string}>`
   height: 630px;
   width: 240px;
   background-color: black;
@@ -15,6 +15,7 @@ export const FinalLayout = styled.div`
   justify-content: center;
   position: relative;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.40);
+  background-color: ${(props) => props.backgroundColor};
 `
 export const FinalImgs = styled.div`
   position: absolute;

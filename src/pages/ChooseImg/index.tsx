@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./style";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import ChooseImgProps from "interfaces/ChooseImgProps";
 import selectBackgroundColor from "helper/selectBackgroundColor";
-import selectColor from "helper/selectColor";
-import { photo } from "atoms/photo";
+import { atomColor, photo } from "atoms/photo";
 
 const ChooseImg = ({ setPages }: ChooseImgProps) => {
   const [getPhotoes, setGetPhotoes] = useAtom(photo);
   const [selectedImg, setSelectedImg] = useState<string[]>([]);
   const [time, setTime] = useState(15);
-  const [selectedColorIndex, setSelectedColorIndex] = useState<number>(0);
+  const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
   const color = [
     "black",
     "gray",

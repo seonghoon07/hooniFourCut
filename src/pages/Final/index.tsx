@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import * as S from './style'
 import { useAtom } from 'jotai';
-import { photo } from '../../atoms/photo';
+import { atomColor, photo } from '../../atoms/photo';
+import selectBackgroundColor from 'helper/selectBackgroundColor';
 
 const Final = () => {
   const [finalImg,getFinalImg] = useAtom(photo)
+  const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
+
   return (
     <S.Layout>
-      <S.FinalLayout>
+      <S.FinalLayout backgroundColor={selectBackgroundColor(selectedColorIndex)} >
         <S.FinalImgs>
           {
             finalImg.map((item,index) => (
