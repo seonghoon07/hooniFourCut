@@ -39,7 +39,7 @@ const Final = () => {
           }
         </S.FinalImgs>
       </S.FinalLayout>
-      <button onClick={onDownloadBtn} >다운로드</button>
+      <S.Install onClick={onDownloadBtn} >다운로드</S.Install>
     </S.Layout>
   );
 };
