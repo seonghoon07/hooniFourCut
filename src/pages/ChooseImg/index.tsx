@@ -7,7 +7,7 @@ import { atomColor, photo } from "atoms/photo";
 
 const ChooseImg = ({ setPages }: ChooseImgProps) => {
   const [getPhotoes, setGetPhotoes] = useAtom(photo);
-  const [selectedImg, setSelectedImg] = useState<string[]>([]);
+  const [selectedImgs, setSelectedImgs] = useState<string[]>([]);
   const [time, setTime] = useState(15);
   const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
   const color = [
@@ -21,47 +21,48 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
     "lightpurple",
   ];
 
+  // item은 사진링크
   const handleImageClick = (item: string) => {
-    if (selectedImg.includes(item)) {
-      setSelectedImg(selectedImg.filter((i) => i !== item));
+    if (selectedImgs.includes(item)) {
+      setSelectedImgs(selectedImgs.filter((i) => i !== item));
     } else {
-      if (selectedImg.length < 4) setSelectedImg([...selectedImg, item]);
+      if (selectedImgs.length < 4) setSelectedImgs([...selectedImgs, item]);
     }
   };
 
+  // 사진 랜덤으로 섞어주는 함수
   const getRandomElements = (list: string[], roof: number) => {
     const shuffled = list.sort(() => 0.5 - Math.random());
     return shuffled.slice(0, roof);
   };
 
-  const onSelectColor = (index: number) => {
-    setSelectedColorIndex(index);
-  };
-
   useEffect(() => {
     if (time > 0) setTimeout(() => setTime(time - 1), 1000);
     if (time === 0) {
-      if (selectedImg.length === 4) {
-        setGetPhotoes(selectedImg);
-      } else if (selectedImg.length === 0) {
+      if (selectedImgs.length === 4) {
+        setGetPhotoes(selectedImgs);
+      } else if (selectedImgs.length === 0) {
         const randomPhotoes = getRandomElements(getPhotoes, 4);
         setGetPhotoes(randomPhotoes);
-      } else if (selectedImg.length === 1) {
+      } else if (selectedImgs.length === 1) {
         const randomPhotoes = getRandomElements(getPhotoes, 3);
+        setGetPhotoes(randomPhotoes);
+      } else if (selectedImgs.length === 2) {
+        const randomPhotoes = getRandomElements(getPhotoes, 2);
+        setGetPhotoes(randomPhotoes);
+      } else if (selectedImgs.length === 3) {
+        const randomPhotoes = getRandomElements(getPhotoes, 1);
         setGetPhotoes(randomPhotoes);
       }
       setPages(2);
     }
   }, [time]);
-  useEffect(() => {
-    console.log(selectedImg);
-  }, [selectedImg]);
 
   return (
     <S.Layout>
       <S.GetImgsLayout>
         <S.TextLayout>
-          <S.SelectImgCount>{selectedImg.length}/4</S.SelectImgCount>
+          <S.SelectImgCount>{selectedImgs.length}/4</S.SelectImgCount>
           <S.ChooseTime>{time}초</S.ChooseTime>
         </S.TextLayout>
         <S.Title>사진을 고르세요</S.Title>
@@ -71,7 +72,7 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
               src={item}
               key={index}
               onClick={() => handleImageClick(item)}
-              selected={selectedImg.includes(item)}
+              selected={selectedImgs.includes(item)}
               alt={`Image ${index}`}
             />
           ))}
@@ -80,7 +81,9 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
         <S.ChooseColor>
           {color.map((item, index) => {
             return (
-              <S.ColorBox onClick={() => onSelectColor(index)}></S.ColorBox>
+              <S.ColorBox
+                onClick={() => setSelectedColorIndex(index)}
+              ></S.ColorBox>
             );
           })}
         </S.ChooseColor>
@@ -90,7 +93,7 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
           backgroundColor={selectBackgroundColor(selectedColorIndex)}
         >
           <S.FinalImgs>
-            {selectedImg.map((item, index) => (
+            {selectedImgs.map((item, index) => (
               <S.FinalImg src={item} key={index} />
             ))}
           </S.FinalImgs>
