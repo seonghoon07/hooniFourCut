@@ -4,7 +4,7 @@ import ChooseImg from "./ChooseImg";
 import Final from "./Final";
 
 const Home = () => {
-  const [pages,setPages] = useState(1)
+  const [pages,setPages] = useState(0)
   return (
     <>
       {pages === 0 && <FirstCam setPages={setPages} />}
