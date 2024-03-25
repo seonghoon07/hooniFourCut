@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
 import * as S from "./style";
 import useSound from "use-sound";
@@ -8,15 +8,19 @@ import { photo } from "atoms/photo";
 import ChooseImgProps from "interfaces/ChooseImgProps";
 
 const Cam = ({ setPages }: ChooseImgProps) => {
-  const [isStart, setIsStart] = useState(false);
-  const [time, setTime] = useState(2);
-  const webcamRef = useRef<Webcam>(null);
   const [photoes, setPhotoes] = useAtom(photo);
-  const [currentImage, setCurrentImage] = useState("");
   const [soundPlay] = useSound(shutter);
 
-  const startButtonClick = () => {
-    setIsStart(true);
+  const [isStart, setIsStart] = useState(false);
+  const [time, setTime] = useState(2);
+  const [currentImage, setCurrentImage] = useState("");
+  
+  const webcamRef = useRef<Webcam>(null);
+
+  const videoConstraints = {
+    width: 800,
+    height: 500,
+    aspectRatio: 16 / 9,
   };
 
   const capture = () => {
@@ -37,10 +41,6 @@ const Cam = ({ setPages }: ChooseImgProps) => {
   };
 
   useEffect(() => {
-    console.log(photoes);
-  }, [photoes]);
-
-  useEffect(() => {
     if (isStart && time > 0) {
       setTimeout(() => setTime(time - 1), 1500);
     }
@@ -48,12 +48,6 @@ const Cam = ({ setPages }: ChooseImgProps) => {
       capture();
     }
   }, [isStart, time]);
-
-  const videoConstraints = {
-    width: 800,
-    height: 500,
-    aspectRatio: 16 / 9,
-  };
 
   return (
     <S.Layout>
@@ -71,7 +65,9 @@ const Cam = ({ setPages }: ChooseImgProps) => {
         </S.CamLayout>
       )}
       {isStart === false ? (
-        <S.StartButton onClick={startButtonClick}>촬영 시작하기</S.StartButton>
+        <S.StartButton onClick={() => setIsStart(true)}>
+          촬영 시작하기
+        </S.StartButton>
       ) : (
         <>
           <S.Second>{time}</S.Second>
