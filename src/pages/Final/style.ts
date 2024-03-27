@@ -14,15 +14,12 @@ export const FinalLayout = styled.div<{ backgroundColor: string }>`
   background-color: black;
   display: flex;
   justify-content: center;
-  position: relative;
   box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.4);
   background-color: ${(props) => props.backgroundColor};
 `;
 export const FinalImgs = styled.div`
-  position: absolute;
-  top: 1.5%;
+  margin-top: 8px;
   width: 220px;
-  height: 550px;
   display: flex;
   flex-direction: column;
   gap: 4px;
