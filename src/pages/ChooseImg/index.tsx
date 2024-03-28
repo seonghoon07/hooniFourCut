@@ -4,12 +4,13 @@ import { useAtom } from "jotai";
 import ChooseImgProps from "interfaces/ChooseImgProps";
 import selectBackgroundColor from "helper/selectBackgroundColor";
 import { atomColor, photo } from "atoms/photo";
+import { SelectRupi } from "assets/SelectRupi";
 
 const ChooseImg = ({ setPages }: ChooseImgProps) => {
-  const [getPhotoes, setGetPhotoes] = useAtom(photo);
+  const [getPhotos, setGetPhotos] = useAtom(photo);
   const [selectedImgs, setSelectedImgs] = useState<string[]>([]);
-  const [time, setTime] = useState(15);
-  const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
+  const [time, setTime] = useState(99999);
+  // const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
   const color = [
     "black",
     "gray",
@@ -39,20 +40,17 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
   useEffect(() => {
     if (time > 0) setTimeout(() => setTime(time - 1), 1000);
     if (time === 0) {
-      if (selectedImgs.length === 4) {
-        setGetPhotoes(selectedImgs);
-      } else if (selectedImgs.length === 0) {
-        const randomPhotoes = getRandomElements(getPhotoes, 4);
-        setGetPhotoes(randomPhotoes);
-      } else if (selectedImgs.length === 1) {
-        const randomPhotoes = getRandomElements(getPhotoes, 3);
-        setGetPhotoes(randomPhotoes);
-      } else if (selectedImgs.length === 2) {
-        const randomPhotoes = getRandomElements(getPhotoes, 2);
-        setGetPhotoes(randomPhotoes);
-      } else if (selectedImgs.length === 3) {
-        const randomPhotoes = getRandomElements(getPhotoes, 1);
-        setGetPhotoes(randomPhotoes);
+      if (selectedImgs.length === 0) {
+        const randomPhotos = getRandomElements(getPhotos, 4);
+        setGetPhotos(randomPhotos);
+      } else {
+        let count = 4 - selectedImgs.length;
+        if (count > 0) {
+          const randomPhotos = getRandomElements(getPhotos, count);
+          setGetPhotos(randomPhotos);
+        } else {
+          setGetPhotos(selectedImgs);
+        }
       }
       setPages(2);
     }
@@ -67,7 +65,7 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
         </S.TextLayout>
         <S.Title>사진을 고르세요</S.Title>
         <S.GetImgs>
-          {getPhotoes.map((item, index) => (
+          {getPhotos.map((item, index) => (
             <S.GetImg
               src={item}
               key={index}
@@ -82,15 +80,18 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
           {color.map((item, index) => {
             return (
               <S.ColorBox
-                onClick={() => setSelectedColorIndex(index)}
+              // onClick={() => setSelectedColorIndex(index)}
               ></S.ColorBox>
             );
           })}
+          <div>
+            <SelectRupi />
+          </div>
         </S.ChooseColor>
       </S.GetImgsLayout>
       <S.PreviewLayout>
         <S.FinalLayout
-          backgroundColor={selectBackgroundColor(selectedColorIndex)}
+        //backgroundColor={selectBackgroundColor(selectedColorIndex)}
         >
           <S.FinalImgs>
             {selectedImgs.map((item, index) => (

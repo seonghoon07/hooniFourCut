@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Rupi from "../../assets/Rupi.svg";
 
 export const Layout = styled.div`
   width: 100%;
@@ -57,26 +58,23 @@ export const ChooseTime = styled.h1`
   font-size: 40px;
 `;
 export const PreviewLayout = styled.div`
-  width: 400px;
-  height: 600px;
+  background-image: url(${Rupi});
+  background-repeat: none;
+  width: 240px;
+  height: 630px;
   display: flex;
   justify-content: center;
-  align-items: center;
 `;
-export const FinalLayout = styled.div<{ backgroundColor: string}>`
+export const FinalLayout = styled.div`
   height: 567px;
-  width: 216px;
+  margin-top: 8px;
   display: flex;
   justify-content: center;
-  position: relative;
-  background-color: ${(props) => props.backgroundColor};
-  box-shadow: 0px 4px 6px 0px rgba(0, 0, 0, 0.40);
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 export const FinalImgs = styled.div`
-  position: absolute;
-  top: 1.5%;
-  width: 198px;
-  height: 495px;
+  width: 220px;
   display: flex;
   flex-direction: column;
   gap: 4px;
@@ -91,7 +89,7 @@ export const NameLayout = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const Name = styled.h3<{ color: string}>`
+export const Name = styled.h3<{ color: string }>`
   color: ${(props) => props.color};
 `;
 export const DevideLine = styled.hr`
@@ -101,7 +99,7 @@ export const DevideLine = styled.hr`
 `;
 export const ChooseColor = styled.div`
   position: absolute;
-  top: 73%;
+  top: 67%;
   width: 90%;
   height: 120px;
   display: flex;
@@ -111,8 +109,8 @@ export const ChooseColor = styled.div`
   align-items: center;
 `;
 export const ColorBox = styled.div`
-  width: 150px;
-  height: 50px;
+  width: 148px;
+  height: 52px;
   background-color: black;
   &:nth-child(1) {
     background-color: #000000;

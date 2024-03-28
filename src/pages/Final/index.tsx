@@ -12,7 +12,7 @@ const Final = () => {
   const imgref = useRef(null);
 
   const onDownloadBtn = useCallback(async () => {
-    if (imgref.current === null) return
+    if (imgref.current === null) return;
     try {
       const dataURL = await toPng(imgref.current);
       const link = document.createElement("a");
