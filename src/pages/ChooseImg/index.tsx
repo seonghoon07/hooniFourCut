@@ -1,16 +1,15 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import * as S from "./style";
 import { useAtom } from "jotai";
 import ChooseImgProps from "interfaces/ChooseImgProps";
 import selectBackgroundColor from "helper/selectBackgroundColor";
 import { atomColor, photo } from "atoms/photo";
-import { SelectRupi } from "assets/SelectRupi";
 
 const ChooseImg = ({ setPages }: ChooseImgProps) => {
   const [getPhotos, setGetPhotos] = useAtom(photo);
   const [selectedImgs, setSelectedImgs] = useState<string[]>([]);
   const [time, setTime] = useState(99999);
-  // const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
+  const [selectedColorIndex, setSelectedColorIndex] = useAtom(atomColor);
   const color = [
     "black",
     "gray",
@@ -80,18 +79,15 @@ const ChooseImg = ({ setPages }: ChooseImgProps) => {
           {color.map((item, index) => {
             return (
               <S.ColorBox
-              // onClick={() => setSelectedColorIndex(index)}
+                onClick={() => setSelectedColorIndex(index)}
               ></S.ColorBox>
             );
           })}
-          <div>
-            <SelectRupi />
-          </div>
         </S.ChooseColor>
       </S.GetImgsLayout>
       <S.PreviewLayout>
         <S.FinalLayout
-        //backgroundColor={selectBackgroundColor(selectedColorIndex)}
+          backgroundColor={selectBackgroundColor(selectedColorIndex)}
         >
           <S.FinalImgs>
             {selectedImgs.map((item, index) => (

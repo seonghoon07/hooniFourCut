@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import Rupi from "../../assets/Rupi.svg";
 
 export const Layout = styled.div`
   width: 100%;
@@ -58,20 +57,19 @@ export const ChooseTime = styled.h1`
   font-size: 40px;
 `;
 export const PreviewLayout = styled.div`
-  background-image: url(${Rupi});
-  background-repeat: none;
   width: 240px;
   height: 630px;
   display: flex;
   justify-content: center;
 `;
-export const FinalLayout = styled.div`
+export const FinalLayout = styled.div<{ backgroundColor: string}>`
   height: 567px;
   margin-top: 8px;
   display: flex;
   justify-content: center;
   padding-left: 10px;
   padding-right: 10px;
+  background-color: ${(props) => props.backgroundColor};
 `;
 export const FinalImgs = styled.div`
   width: 220px;
